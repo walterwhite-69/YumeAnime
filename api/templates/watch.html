@@ -366,7 +366,99 @@
     .video-wrapper iframe,
     .video-wrapper video {
         width: 100%;
+<<<<<<< HEAD
         aspect-ratio: 16/9;
+=======
+        height: 100%;
+        z-index: 2;
+        pointer-events: none;
+        opacity: 0;
+        background: transparent !important;
+        transition: opacity 0.3s ease;
+    }
+
+    .video-wrapper.user-inactive {
+        cursor: none;
+    }
+
+    .video-wrapper:hover:not(.user-inactive) .player-container,
+    .video-wrapper.paused .player-container,
+    .video-wrapper.menu-open .player-container,
+    .video-wrapper.controls-visible .player-container {
+        opacity: 1;
+    }
+
+    /* Gradients */
+    .player-bottom-gradient {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        height: 40%;
+        background: linear-gradient(to top, rgba(0, 0, 0, 0.95) 0%, transparent 100%);
+        pointer-events: none;
+        z-index: 0;
+    }
+
+    /* Center Play Button */
+    .center-play-pause {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%) scale(1);
+        background: rgba(var(--accent-rgb), 0.85);
+        backdrop-filter: blur(8px);
+        width: 80px;
+        height: 80px;
+        border-radius: 50%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        color: white;
+        cursor: pointer;
+        pointer-events: auto;
+        z-index: 5;
+        opacity: 0;
+        transition: all 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    }
+
+    .video-wrapper.paused .center-play-pause {
+        opacity: 1;
+    }
+
+    .center-play-pause:hover {
+        transform: translate(-50%, -50%) scale(1.1);
+        background: var(--accent);
+    }
+
+    .center-play-pause svg {
+        width: 40px;
+        height: 40px;
+        margin-left: 5px;
+    }
+
+    .video-wrapper:not(.paused) .center-play-pause svg {
+        margin-left: 0;
+    }
+
+    /* Loading Spinner */
+    .custom-loader {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 60px;
+        height: 60px;
+        border: 4px solid rgba(255, 255, 255, 0.1);
+        border-top-color: var(--accent);
+        border-radius: 50%;
+        animation: spin 1s linear infinite;
+        z-index: 4;
+        display: none;
+    }
+
+    .video-wrapper.loading .custom-loader {
+>>>>>>> 1f93286 (fix: mobile video player touch controls and seekbar)
         display: block;
     }
 
@@ -376,7 +468,402 @@
         min-width: 0;
     }
 
+<<<<<<< HEAD
     /* Mobile-Specific Watch Page Improvements */
+=======
+    /* Progress */
+    .progress-container {
+        width: 100%;
+        height: 6px;
+        background: rgba(255, 255, 255, 0.2);
+        border-radius: 3px;
+        cursor: pointer;
+        position: relative;
+        transition: height 0.1s ease;
+    }
+
+    .progress-container:hover {
+        height: 8px;
+    }
+
+    .progress-buffer {
+        position: absolute;
+        top: 0;
+        left: 0;
+        height: 100%;
+        background: rgba(255, 255, 255, 0.4);
+        border-radius: 3px;
+        width: 0%;
+        pointer-events: none;
+    }
+
+    .progress-fill {
+        position: absolute;
+        top: 0;
+        left: 0;
+        height: 100%;
+        background: var(--accent);
+        border-radius: 3px;
+        width: 0%;
+        pointer-events: none;
+        box-shadow: 0 0 10px rgba(var(--accent-rgb), 0.8);
+    }
+
+    .progress-thumb {
+        position: absolute;
+        top: 50%;
+        transform: translate(-50%, -50%) scale(0);
+        width: 16px;
+        height: 16px;
+        background: white;
+        border-radius: 50%;
+        left: 0%;
+        pointer-events: none;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+        transition: transform 0.1s ease;
+    }
+
+    .progress-container:hover .progress-thumb {
+        transform: translate(-50%, -50%) scale(1);
+    }
+
+    /* Buttons */
+    .controls-main {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+    }
+
+    .controls-left,
+    .controls-right {
+        display: flex;
+        align-items: center;
+        gap: 15px;
+    }
+
+    .control-btn {
+        background: none;
+        border: none;
+        color: white;
+        cursor: pointer;
+        padding: 5px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: all 0.2s;
+        opacity: 0.8;
+    }
+
+    .control-btn:hover {
+        opacity: 1;
+        transform: scale(1.1);
+        color: var(--accent);
+    }
+
+    .control-btn svg {
+        width: 22px;
+        height: 22px;
+        filter: drop-shadow(1px 1px 2px rgba(0, 0, 0, 0.5));
+    }
+
+    /* Volume */
+    .volume-container {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+    }
+
+    .volume-slider-container {
+        width: 0;
+        overflow: hidden;
+        transition: width 0.3s ease;
+        display: flex;
+        align-items: center;
+    }
+
+    .volume-container:hover .volume-slider-container {
+        width: 80px;
+    }
+
+    .volume-slider {
+        width: 80px;
+        height: 4px;
+        -webkit-appearance: none;
+        background: rgba(255, 255, 255, 0.3);
+        border-radius: 2px;
+        outline: none;
+        cursor: pointer;
+    }
+
+    .volume-slider::-webkit-slider-thumb {
+        -webkit-appearance: none;
+        width: 12px;
+        height: 12px;
+        background: white;
+        border-radius: 50%;
+    }
+
+    .time-display {
+        color: white;
+        font-size: 0.85rem;
+        font-family: var(--font-mono);
+        font-weight: 500;
+        user-select: none;
+        text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.8);
+        margin-left: 10px;
+    }
+
+    /* Menus */
+    .menu-btn-container {
+        position: relative;
+    }
+
+    .player-menu {
+        position: absolute;
+        bottom: 45px;
+        right: -10px;
+        background: rgba(20, 20, 25, 0.95);
+        backdrop-filter: blur(10px);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        border-radius: var(--radius-md);
+        padding: 10px 0;
+        min-width: 150px;
+        display: flex;
+        flex-direction: column;
+        opacity: 0;
+        pointer-events: auto;
+        transform: translateY(10px) scale(0.95);
+        transform-origin: bottom right;
+        transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+        box-shadow: 0 15px 30px rgba(0, 0, 0, 0.5);
+        z-index: 20;
+    }
+
+    .menu-btn-container.active .player-menu {
+        opacity: 1;
+        pointer-events: auto;
+        transform: translateY(0) scale(1);
+    }
+
+    .player-menu-header {
+        padding: 5px 15px 10px;
+        font-size: 0.75rem;
+        text-transform: uppercase;
+        color: var(--text-muted);
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        margin-bottom: 5px;
+        font-weight: 700;
+    }
+
+    .player-menu-item {
+        padding: 8px 25px 8px 35px;
+        color: white;
+        cursor: pointer;
+        font-size: 0.85rem;
+        position: relative;
+        transition: background 0.2s;
+        display: flex;
+        align-items: center;
+    }
+
+    .player-menu-item:hover {
+        background: rgba(255, 255, 255, 0.1);
+    }
+
+    .player-menu-item.active {
+        color: var(--accent);
+    }
+
+    .player-menu-item.active::before {
+        content: '';
+        position: absolute;
+        left: 15px;
+        width: 6px;
+        height: 6px;
+        background: var(--accent);
+        border-radius: 50%;
+    }
+
+    .player-menu-divider {
+        height: 1px;
+        background: rgba(255, 255, 255, 0.1);
+        margin: 5px 0;
+    }
+
+    .settings-row {
+        display: flex;
+        gap: 5px;
+        padding: 5px 15px;
+        margin-bottom: 10px;
+    }
+
+    .settings-opt-btn {
+        flex: 1;
+        background: rgba(255, 255, 255, 0.1);
+        border: 1px solid transparent;
+        color: white;
+        padding: 4px;
+        border-radius: var(--radius-sm);
+        cursor: pointer;
+        font-size: 0.75rem;
+        transition: all 0.2s;
+        text-align: center;
+    }
+
+    .settings-opt-btn:hover {
+        background: rgba(255, 255, 255, 0.2);
+    }
+
+    .settings-opt-btn.active {
+        background: var(--accent);
+        color: white;
+        border-color: var(--accent);
+    }
+
+    /* Top Bar & Title */
+    .player-top-bar {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        padding: 20px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        z-index: 10;
+        pointer-events: auto;
+        background: linear-gradient(to bottom, rgba(0, 0, 0, 0.9) 0%, transparent 100%);
+        opacity: 0;
+        transition: opacity 0.3s ease;
+    }
+
+    .video-wrapper:hover .player-top-bar,
+    .video-wrapper.paused .player-top-bar,
+    .video-wrapper.menu-open .player-top-bar,
+    .video-wrapper.controls-visible .player-top-bar {
+        opacity: 1;
+    }
+
+    .player-title {
+        color: white;
+        font-size: 1.1rem;
+        font-weight: 600;
+        text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.8);
+        display: flex;
+        align-items: center;
+        gap: 10px;
+    }
+
+    .player-ep-badge {
+        background: var(--accent);
+        color: white;
+        padding: 2px 8px;
+        border-radius: 4px;
+        font-size: 0.8rem;
+        font-weight: bold;
+    }
+
+    /* Skip overlay inside player */
+    .custom-skip-btn {
+        position: absolute;
+        bottom: 80px;
+        right: 20px;
+        background: rgba(0, 0, 0, 0.7);
+        backdrop-filter: blur(10px);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        color: white;
+        padding: 8px 16px;
+        border-radius: var(--radius-sm);
+        font-weight: 600;
+        font-size: 0.9rem;
+        cursor: pointer;
+        transition: all 0.2s;
+        pointer-events: auto;
+        z-index: 50;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        transform: translateX(150%);
+    }
+
+    .custom-skip-btn.show {
+        transform: translateX(0);
+    }
+
+    .custom-skip-btn:hover {
+        background: rgba(255, 255, 255, 0.2);
+        transform: scale(1.05);
+        color: var(--accent);
+    }
+
+    /* Embed iframe player */
+    .embed-player-frame {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        border: none;
+        border-radius: var(--radius-lg);
+    }
+
+    /* Source Switcher Bar */
+    .source-switcher-bar {
+        margin-top: 10px;
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+        background: var(--bg-surface);
+        padding: 5px 10px;
+        border-radius: var(--radius-md);
+        gap: 10px;
+        flex-wrap: wrap;
+    }
+
+    .source-switcher-label {
+        font-size: 0.85rem;
+        color: var(--text-muted);
+        font-weight: 500;
+        white-space: nowrap;
+    }
+
+    .source-switcher-options {
+        display: flex;
+        border-radius: var(--radius-sm);
+        overflow: hidden;
+        border: 1px solid var(--border-color);
+        flex-wrap: wrap;
+    }
+
+    .source-switcher-btn {
+        border: none;
+        background: var(--bg-elevated);
+        color: var(--text-primary);
+        padding: 6px 14px;
+        font-size: 0.8rem;
+        font-weight: bold;
+        cursor: pointer;
+        transition: all 0.2s;
+        white-space: nowrap;
+        text-decoration: none;
+    }
+
+    .source-switcher-btn:hover {
+        background: var(--bg-surface-hover);
+        color: var(--text-primary);
+    }
+
+    .source-switcher-btn.active {
+        background: var(--accent) !important;
+        color: var(--bg-primary) !important;
+    }
+
+    .source-switcher-btn+.source-switcher-btn {
+        border-left: 1px solid var(--border-color);
+    }
+
+    /* Responsive */
+>>>>>>> 1f93286 (fix: mobile video player touch controls and seekbar)
     @media (max-width: 768px) {
         .watch-layout {
             gap: var(--space-md);
@@ -969,6 +1456,7 @@
         togglePlayer(savedPlayer, false);
     }
 
+<<<<<<< HEAD
     if (playerSelect) {
         playerSelect.addEventListener('change', function () {
             const mode = this.value;
@@ -995,6 +1483,45 @@
                     externalPlayer.src = externalSrc;
                 }
                 externalPlayer.style.display = 'block';
+=======
+        // Mobile: tap to toggle controls visibility
+        let mobileControlsVisible = false;
+        const showMobileControls = () => {
+            if (!masterWrapper) return;
+            masterWrapper.classList.add('controls-visible');
+            masterWrapper.classList.remove('user-inactive');
+            mobileControlsVisible = true;
+            clearTimeout(inactivityTimeout);
+            if (!video.paused) {
+                inactivityTimeout = setTimeout(() => {
+                    masterWrapper.classList.remove('controls-visible');
+                    if (!video.paused) masterWrapper.classList.add('user-inactive');
+                    mobileControlsVisible = false;
+                }, 3000);
+            }
+        };
+
+        if (masterWrapper) {
+            masterWrapper.addEventListener('mousemove', resetInactivity);
+            masterWrapper.addEventListener('mouseleave', () => {
+                if (!video.paused) {
+                    clearTimeout(inactivityTimeout);
+                    if (masterWrapper) masterWrapper.classList.add('user-inactive');
+                }
+            });
+            // On mobile: single tap toggles control bar visibility
+            masterWrapper.addEventListener('touchstart', (e) => {
+                // Only toggle if the tap isn't on a control button/progress bar
+                const tag = e.target.tagName.toLowerCase();
+                const isControl = e.target.closest('.controls-bar') || e.target.closest('.player-top-bar') || e.target.id === 'mobilePlayOverlay';
+                if (!isControl) {
+                    showMobileControls();
+                }
+                resetInactivity();
+            }, { passive: true });
+            document.addEventListener('keydown', resetInactivity);
+        }
+>>>>>>> 1f93286 (fix: mobile video player touch controls and seekbar)
 
                 // Set up external player error detection (iframe load timeout)
                 if (!isAutoFallback) {
@@ -1009,7 +1536,55 @@
             }
             if (skipButtons) skipButtons.style.display = 'none';
 
+<<<<<<< HEAD
             // Pause internal player if playing
+=======
+        video.addEventListener('progress', () => {
+            if (video.buffered.length > 0) {
+                const pct = (video.buffered.end(video.buffered.length - 1) / video.duration) * 100;
+                progressBuffer.style.width = pct + '%';
+            }
+        });
+
+        progressContainer.addEventListener('click', (e) => {
+            const rect = progressContainer.getBoundingClientRect();
+            const pos = (e.clientX - rect.left) / rect.width;
+            video.currentTime = pos * video.duration;
+        });
+
+        // Touch seeking for mobile progress bar
+        let isTouchSeeking = false;
+        progressContainer.addEventListener('touchstart', (e) => {
+            isTouchSeeking = true;
+            const rect = progressContainer.getBoundingClientRect();
+            const pos = Math.max(0, Math.min(1, (e.touches[0].clientX - rect.left) / rect.width));
+            video.currentTime = pos * video.duration;
+            showMobileControls();
+        }, { passive: true });
+        progressContainer.addEventListener('touchmove', (e) => {
+            if (!isTouchSeeking) return;
+            const rect = progressContainer.getBoundingClientRect();
+            const pos = Math.max(0, Math.min(1, (e.touches[0].clientX - rect.left) / rect.width));
+            video.currentTime = pos * video.duration;
+        }, { passive: true });
+        progressContainer.addEventListener('touchend', () => {
+            isTouchSeeking = false;
+        });
+
+        // Volume & Mute
+        muteBtn.addEventListener('click', () => video.muted = !video.muted);
+        volumeSlider.addEventListener('input', (e) => {
+            video.volume = e.target.value;
+            video.muted = e.target.value == 0;
+        });
+        video.addEventListener('volumechange', () => {
+            volumeSlider.value = video.muted ? 0 : video.volume;
+            muteBtn.innerHTML = video.muted || video.volume === 0 ? '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon><line x1="23" y1="9" x2="17" y2="15"></line><line x1="17" y1="9" x2="23" y2="15"></line></svg>' : '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon><path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"></path></svg>';
+        });
+
+        // Fullscreen
+        fsBtn.addEventListener('click', () => {
+>>>>>>> 1f93286 (fix: mobile video player touch controls and seekbar)
             try {
                 if (window.videojs && window.videojs.getPlayer('videoPlayer')) {
                     window.videojs.getPlayer('videoPlayer').pause();
